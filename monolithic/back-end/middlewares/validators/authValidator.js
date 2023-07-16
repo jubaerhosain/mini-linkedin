@@ -31,9 +31,15 @@ const loginValidator = [
         .withMessage("Email must be provided")
         .isEmail()
         .withMessage("Must be a valid email")
-        .custom((email) => {
-            // is email exist, if yes true
-            return true;
+        .custom(async (email) => {
+            try {
+                const exists = await userRepository.isEmailExists(email);
+                if (!exists) {
+                    throw new Error("Email does not exists");
+                }
+            } catch (err) {
+                throw new Error(err.message);
+            }
         }),
     body("password").trim().notEmpty().withMessage("Password must be provided"),
     commonValidationHandler,

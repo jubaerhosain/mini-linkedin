@@ -16,7 +16,15 @@ async function isEmailExists(email) {
     }
 }
 
-async function getUserByEmail(email) {}
+async function getUserByEmail(email) {
+    try {
+        const existedUser = await User.findOne({ email });
+        return existedUser;
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occurred getting user information");
+    }
+}
 
 export default {
     createUser,
