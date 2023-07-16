@@ -1,4 +1,4 @@
-async function addPost(req, res) {
+async function createPost(req, res) {
 
 }
 
