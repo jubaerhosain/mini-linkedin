@@ -1,8 +1,13 @@
 import express from "express";
 const postRouter = express.Router();
 
-postRouter.post("/", (req, res) => { })
+import authMiddleware from "../middlewares/authMiddleware.js";
 
-postRouter.get("/", (req, res) => { })
+postRouter.post("/", authMiddleware.checkAuthentication, (req, res) => {
+    console.log(req.user);
+    res.json(req.user);
+});
+
+postRouter.get("/", authMiddleware.checkAuthentication, (req, res) => {});
 
 export default postRouter;

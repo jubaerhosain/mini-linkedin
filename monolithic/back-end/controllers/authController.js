@@ -40,7 +40,7 @@ async function login(req, res) {
 
         console.log(user);
 
-        res.cookie(process.env.AUTH_COOKIE_NAME, token, {
+        res.cookie(config.cookie.authCookieName, token, {
             httpOnly: true,
             maxAge: config.jwt.expiry,
             signed: true,
