@@ -5,7 +5,6 @@ import authRouter from "./routes/authRouter.js"
 import postRouter from "./routes/postRouter.js";
 import notificationRouter from "./routes/notificationRouter.js"
 
-
 const app = express();
 
 app.use("/auth", authRouter);
