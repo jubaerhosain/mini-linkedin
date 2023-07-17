@@ -15,3 +15,5 @@ minioClient.listBuckets((err, buckets) => {
     }
     console.log("Buckets:", buckets);
 });
+
+export default minioClient;
