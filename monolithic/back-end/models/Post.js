@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
         ref: "mini_linkedin_users",
         required: true,
     },
-    text: {
+    content: {
         type: String,
         required: true,
     },

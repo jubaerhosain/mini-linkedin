@@ -38,8 +38,6 @@ async function login(req, res) {
             name: user.name,
         });
 
-        console.log(user);
-
         res.cookie(config.cookie.authCookieName, token, {
             httpOnly: true,
             maxAge: config.jwt.expiry,
