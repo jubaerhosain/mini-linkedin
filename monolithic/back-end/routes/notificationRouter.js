@@ -5,7 +5,7 @@ import notificationController from "../controllers/notificationController.js";
 
 const notificationRouter = express.Router();
 
-notificationRouter.post("/", (req, res) => {});
+notificationRouter.post("/", authMiddleware.checkAuthentication, (req, res) => {});
 
 notificationRouter.get(
     "/",
