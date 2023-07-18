@@ -10,6 +10,10 @@ import notificationRouter from "./routes/notificationRouter.js";
 import notFoundHandler from "./middlewares/common/notFoundHandler.js";
 import defaultErrorHandler from "./middlewares/common/defaultErrorHandler.js";
 
+
+import jobs from "./jobs/jobs.js"
+jobs.startDeleteNotificationJob();
+
 const app = express();
 
 app.use(
