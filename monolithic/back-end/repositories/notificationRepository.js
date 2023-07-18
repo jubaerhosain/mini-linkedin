@@ -6,7 +6,10 @@ async function createNotification(notification) {
     return newNotification;
 }
 
-async function getNotifications(user_id) {}
+async function getNotifications(user_id) {
+    const notifications = await Notification.find();
+    return notifications;
+}
 
 export default {
     createNotification,

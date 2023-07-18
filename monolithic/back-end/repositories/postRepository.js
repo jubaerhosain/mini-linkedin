@@ -7,11 +7,15 @@ async function createPost(postData) {
 }
 
 async function getPosts(user_id) {
+    // find all posts excluding this user_id(see doc)
     const posts = await Post.find();
     return posts;
 }
 
+async function updatePost(postData) {}
+
 export default {
     createPost,
     getPosts,
+    updatePost,
 };

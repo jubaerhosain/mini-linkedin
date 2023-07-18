@@ -1,13 +1,16 @@
 import express from "express";
+
+import authMiddleware from "../middlewares/authMiddleware.js";
+import notificationController from "../controllers/notificationController.js";
+
 const notificationRouter = express.Router();
 
-notificationRouter.post("/", (req, res) => {
+notificationRouter.post("/", (req, res) => {});
 
-})
-
-notificationRouter.get("/", (req, res) => {
-    
-})
-
+notificationRouter.get(
+    "/",
+    authMiddleware.checkAuthentication,
+    notificationController.getNotifications
+);
 
 export default notificationRouter;
