@@ -8,7 +8,9 @@ async function createPost(postData) {
 
 async function getPosts(user_id) {
     // find all posts excluding this user_id(see doc)
-    const posts = await Post.find();
+    // const posts = await Post.find();
+    const posts = await Post.find({ user_id: { $ne: user_id } });
+
     return posts;
 }
 
