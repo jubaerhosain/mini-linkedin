@@ -33,7 +33,14 @@ function singleFileUploader(name) {
     }
 }
 
+function multipleFileUploader() {
+    return async function (req, res, next) {
+
+    }
+}
+
 
 export default {
     singleFileUploader,
+    multipleFileUploader
 }
