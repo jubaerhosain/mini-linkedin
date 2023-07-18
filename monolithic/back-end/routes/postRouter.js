@@ -1,10 +1,15 @@
 import express from "express";
-const postRouter = express.Router();
+import multer from "multer";
 
 import authMiddleware from "../middlewares/authMiddleware.js";
 import postController from "../controllers/postController.js"
 
-postRouter.post("/", authMiddleware.checkAuthentication, postController.createPost);
+const postRouter = express.Router();
+const upload = multer({ dest: 'uploads/' });
+
+// postRouter.post("/", authMiddleware.checkAuthentication, postController.createPost);
+postRouter.post("/", upload.single("image"), postController.createPost);
+
 
 postRouter.get("/", authMiddleware.checkAuthentication, postController.getPosts);
 

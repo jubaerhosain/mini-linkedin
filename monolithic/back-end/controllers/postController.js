@@ -6,6 +6,9 @@ async function createPost(req, res) {
 
         const postData = req.body;
 
+
+        console.log(req.file, postData.text)
+
         res.json(postData);
 
         console.log(req.body);
