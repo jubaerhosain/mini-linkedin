@@ -1,9 +1,11 @@
 import { useState } from "react";
 import styles from "./RegistrationPage.module.css";
 import { useAuthProvider } from "../../contexts/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function SignInForm() {
   const { register } = useAuthProvider();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -31,7 +33,13 @@ export default function SignInForm() {
     //   console.log(err.response?.data);
     // }
 
-    // await register(formData);
+    try {
+      await register(formData);
+      navigate("/");
+      console.log("Registration successful");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
