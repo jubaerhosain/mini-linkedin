@@ -10,7 +10,7 @@ async function register(req, res) {
 
         user.password = await passwordUtils.hashPassword(user.password);
 
-        await userRepository.createUser(user);
+        await userRepository.createOne(user);
 
         res.status(200).json(Response.success("Registration successful"));
     } catch (err) {
@@ -22,7 +22,7 @@ async function register(req, res) {
 async function login(req, res) {
     try {
         const { email, password } = req.body;
-        const user = await userRepository.getUserByEmail(email);
+        const user = await userRepository.findOneByEmail(email);
 
         const isValid = await passwordUtils.verifyPassword(password, user.password);
         if (!isValid) {
@@ -33,7 +33,7 @@ async function login(req, res) {
         }
 
         const token = jwtUtils.generateToken({
-            id: user._id,
+            _id: user._id,
             email: user.email,
             name: user.name,
         });

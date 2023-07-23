@@ -1,18 +1,31 @@
 import Notification from "../models/Notification.js";
 
-async function createNotification(notification) {
+async function createOne(notification) {
     const newNotification = new Notification(notification);
     await newNotification.save();
     return newNotification;
 }
 
-async function createMultipleNotification(notifications) {
+async function createMany(notifications) {
     await Notification.insertMany(notifications);
 }
 
-async function getNotifications(user_id) {
-    const notifications = await Notification.find();
+async function findAllByUserId(user_id) {
+    const notifications = await Notification.find({ user_id }).sort({ _id: -1 });
     return notifications;
+}
+
+async function updateOne(_id, data) {
+    await Notification.findOneAndUpdate({ _id: _id }, data);
+}
+
+async function updateMany(_ids, data) {
+    try {
+        await Notification.updateMany({ _id: { $in: _ids } }, data);
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occured");
+    }
 }
 
 async function deleteOldNotifications() {
@@ -42,8 +55,10 @@ async function deleteOldNotifications() {
 }
 
 export default {
-    createNotification,
-    createMultipleNotification,
-    getNotifications,
+    createOne,
+    createMany,
+    findAllByUserId,
+    updateOne,
+    updateMany,
     deleteOldNotifications,
 };

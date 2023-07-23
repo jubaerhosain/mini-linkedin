@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 
-async function createUser(user) {
+async function createOne(user) {
     const newUser = new User(user);
     await newUser.save();
 }
@@ -16,7 +16,7 @@ async function isEmailExists(email) {
     }
 }
 
-async function getUserByEmail(email) {
+async function findOneByEmail(email) {
     try {
         const existedUser = await User.findOne({ email });
         return existedUser;
@@ -26,7 +26,7 @@ async function getUserByEmail(email) {
     }
 }
 
-async function findFriends(user_id) {
+async function findAllFriends(user_id) {
     try {
         const users = await User.find({ _id: { $ne: user_id } });
         return users;
@@ -37,8 +37,8 @@ async function findFriends(user_id) {
 }
 
 export default {
-    createUser,
+    createOne,
     isEmailExists,
-    getUserByEmail,
-    findFriends,
+    findOneByEmail,
+    findAllFriends,
 };

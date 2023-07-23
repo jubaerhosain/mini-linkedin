@@ -8,12 +8,12 @@ async function createPost(req, res) {
         const user = req.user;
 
         const postData = req.body;
-        postData.user_id = user.id;
+        postData.user_id = user._id;
 
-        const newPost = await postRepository.createPost(postData);
+        const newPost = await postRepository.createOne(postData);
 
         // create notification for all other user except current user
-        const friends = await userRepository.findFriends(user.id);
+        const friends = await userRepository.findAllFriends(user._id);
 
         const notifications = [];
         friends.forEach(friend => {
@@ -25,7 +25,7 @@ async function createPost(req, res) {
             notifications.push(notification);
         });
 
-        await notificationRepository.createMultipleNotification(notifications);
+        await notificationRepository.createMany(notifications);
 
         res.json(Response.success("Post added successfully"));
     } catch (err) {
@@ -37,7 +37,7 @@ async function createPost(req, res) {
 async function getPosts(req, res) {
     try {
         const user = req.user;
-        const posts = await postRepository.getPosts(user.id);
+        const posts = await postRepository.findAll(user._id);
         res.json(Response.success("Posts are retrieved successfully", posts));
     } catch (err) {
         console.log(err);
@@ -46,7 +46,7 @@ async function getPosts(req, res) {
 }
 
 async function updatePost(req, res) {
-    // update read = true
+
 }
 
 export default {
