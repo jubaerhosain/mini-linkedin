@@ -6,6 +6,10 @@ async function createNotification(notification) {
     return newNotification;
 }
 
+async function createMultipleNotification(notifications) {
+    await Notification.insertMany(notifications);
+}
+
 async function getNotifications(user_id) {
     const notifications = await Notification.find();
     return notifications;
@@ -18,7 +22,7 @@ async function deleteOldNotifications() {
         const notificationCount = await Notification.countDocuments();
 
         if (notificationCount > maxNotificationCount) {
-            const oldestNotifications = await Notification.find()
+            const oldestNotifications = await Notification.find({})
                 .sort({ _id: 1 })
                 .limit(notificationCount - maxNotificationCount);
 
@@ -39,6 +43,7 @@ async function deleteOldNotifications() {
 
 export default {
     createNotification,
+    createMultipleNotification,
     getNotifications,
     deleteOldNotifications,
 };

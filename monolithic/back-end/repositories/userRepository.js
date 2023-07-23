@@ -26,8 +26,19 @@ async function getUserByEmail(email) {
     }
 }
 
+async function findFriends(user_id) {
+    try {
+        const users = await User.find({ _id: { $ne: user_id } });
+        return users;
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occured");
+    }
+}
+
 export default {
     createUser,
     isEmailExists,
     getUserByEmail,
+    findFriends,
 };
