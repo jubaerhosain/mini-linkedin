@@ -35,7 +35,9 @@ async function getPosts(req, res) {
     }
 }
 
-async function updatePost(req, res) {}
+async function updatePost(req, res) {
+    // update read = true
+}
 
 export default {
     createPost,
