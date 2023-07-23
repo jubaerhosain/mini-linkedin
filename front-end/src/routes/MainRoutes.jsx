@@ -7,6 +7,7 @@ import LoginPage from "../pages/login/LoginPage";
 
 import Navbar from "../components/navbar/Navbar";
 import HomePage from "../pages/home/HomePage";
+import NotificationPage from "../pages/notification/NotificationPage";
 
 function HomeLayout() {
   return (
@@ -28,7 +29,7 @@ export default function MainRoutes() {
       <Route path="/*" element={<PrivateLayout />}>
         <Route element={<HomeLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="notifications" element={<h1>notifications</h1>} />
+          <Route path="notifications" element={<NotificationPage />} />
         </Route>
       </Route>
     </Routes>
