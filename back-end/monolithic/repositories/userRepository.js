@@ -6,7 +6,7 @@ async function createOne(user) {
         await newUser.save();
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 
@@ -37,7 +37,7 @@ async function findAllFriends(user_id) {
         return users;
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 

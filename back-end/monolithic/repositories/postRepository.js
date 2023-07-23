@@ -7,7 +7,7 @@ async function createOne(postData) {
         return newPost;
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 
@@ -16,20 +16,19 @@ async function findAll(user_id) {
         // find all posts excluding this user_id(see doc)
         // const posts = await Post.find();
         const posts = await Post.find({ user_id: { $ne: user_id } });
-    
+
         return posts;
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 
 async function updatePost(postData) {
     try {
-        
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 

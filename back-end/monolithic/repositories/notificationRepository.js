@@ -16,7 +16,7 @@ async function createMany(notifications) {
         await Notification.insertMany(notifications);
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 
@@ -26,7 +26,7 @@ async function findAllByUserId(user_id) {
         return notifications;
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 
@@ -35,7 +35,7 @@ async function updateOne(_id, data) {
         await Notification.findOneAndUpdate({ _id: _id }, data);
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 
@@ -44,7 +44,7 @@ async function updateMany(_ids, data) {
         await Notification.updateMany({ _id: { $in: _ids } }, data);
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 
