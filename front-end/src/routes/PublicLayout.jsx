@@ -9,5 +9,5 @@ export default function PublicLayout() {
     return <h1>Loading....</h1>;
   }
 
-  return !user ? <Outlet /> : navigate("/");
+  return user ? navigate("/") : <Outlet />;
 }
