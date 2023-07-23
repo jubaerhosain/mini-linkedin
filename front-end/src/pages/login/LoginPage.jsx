@@ -1,4 +1,6 @@
 import { useState } from "react";
+import styles from "./LoginPage.module.css";
+import axiosInstance from "../../config/axiosInstance";
 
 export default function SignInForm() {
   const [formData, setFormData] = useState({
@@ -12,34 +14,32 @@ export default function SignInForm() {
       ...prevFormData,
       [name]: value,
     }));
-
-    console.log(formData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can handle the form submission logic.
-    // For example, you can send the form data to a server using Axios or fetch.
-    console.log("Form data submitted:", formData);
+
+    // console.log("Form data submitted:", formData);
+
+    try {
+      const response = await axiosInstance.post("/auth/login", formData);
+      console.log(response.data);
+    } catch (err) {
+      console.log(err.response?.data);
+    }
   };
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img
-          className="mx-auto h-10 w-auto"
-          src="/logo.png"
-          alt="Mini LinkedIn"
-        />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Login to your account
-        </h2>
+    <div className={styles.container}>
+      <div className={styles.heading}>
+        <img src="/logo.png" alt="Mini LinkedIn" />
+        <h2>Login to your account</h2>
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit}>
+      <div className={styles.formContainer}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 text-left">
+            <label htmlFor="email" className={styles.formLabel}>
               Email address
             </label>
             <div className="mt-2">
@@ -51,13 +51,13 @@ export default function SignInForm() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className={styles.formInput}
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900 text-left">
+            <label htmlFor="password" className={styles.formLabel}>
               Password
             </label>
             <div className="mt-2">
@@ -69,37 +69,28 @@ export default function SignInForm() {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className={styles.formInput}
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <label className="block text-sm font-medium leading-6 text-gray-900 text-left">
-              Remember me
-            </label>
-            <div className="text-sm">
-              <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                Forgot password?
-              </a>
+          <div className={styles.rememberForgot}>
+            <label className="block text-sm font-medium leading-6 text-gray-900 text-left">Remember me</label>
+            <div>
+              <a href="#">Forgot password?</a>
             </div>
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Sign in
+            <button type="submit" className={styles.loginButton}>
+              Login
             </button>
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
-          Not a member?{" "}
-          <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-            Start a 14-day free trial
-          </a>
+        <p className={styles.register}>
+          {`Don't have an account yet? `}
+          <a href="/register">Register</a>
         </p>
       </div>
     </div>
