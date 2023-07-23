@@ -1,22 +1,42 @@
 import Notification from "../models/Notification.js";
 
 async function createOne(notification) {
-    const newNotification = new Notification(notification);
-    await newNotification.save();
-    return newNotification;
+    try {
+        const newNotification = new Notification(notification);
+        await newNotification.save();
+        return newNotification;
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occured");
+    }
 }
 
 async function createMany(notifications) {
-    await Notification.insertMany(notifications);
+    try {
+        await Notification.insertMany(notifications);
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occured");
+    }
 }
 
 async function findAllByUserId(user_id) {
-    const notifications = await Notification.find({ user_id }).sort({ _id: -1 });
-    return notifications;
+    try {
+        const notifications = await Notification.find({ user_id }).sort({ _id: -1 });
+        return notifications;
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occured");
+    }
 }
 
 async function updateOne(_id, data) {
-    await Notification.findOneAndUpdate({ _id: _id }, data);
+    try {
+        await Notification.findOneAndUpdate({ _id: _id }, data);
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occured");
+    }
 }
 
 async function updateMany(_ids, data) {
@@ -29,16 +49,15 @@ async function updateMany(_ids, data) {
 }
 
 async function deleteOldNotifications() {
-    const maxNotificationCount = 10;
+    const maxNotificationCount = 5;
 
     try {
         const notificationCount = await Notification.countDocuments();
 
         if (notificationCount > maxNotificationCount) {
-            const oldestNotifications = await Notification.find({})
+            const oldestNotifications = await Notification.find({ is_read: true })
                 .sort({ _id: 1 })
                 .limit(notificationCount - maxNotificationCount);
-
 
             // Delete the oldest notifications
             await Notification.deleteMany({
@@ -49,8 +68,8 @@ async function deleteOldNotifications() {
         } else {
             console.log("No need to delete old notifications.");
         }
-    } catch (error) {
-        console.error("Error deleting old notifications:", error);
+    } catch (err) {
+        console.error("Error deleting old notifications:", err);
     }
 }
 

@@ -1,8 +1,13 @@
 import User from "../models/User.js";
 
 async function createOne(user) {
-    const newUser = new User(user);
-    await newUser.save();
+    try {
+        const newUser = new User(user);
+        await newUser.save();
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occured");
+    }
 }
 
 async function isEmailExists(email) {
