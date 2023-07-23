@@ -52,9 +52,9 @@ export function AuthProvider({ children }) {
   }
 
   async function logout() {
-    const response = await axiosInstance.delete(`/api/users`);
+    const response = await axiosInstance.delete(`/auth/logout`);
 
-    if (response.success) {
+    if (response.data?.success) {
       setUser(null);
     }
 

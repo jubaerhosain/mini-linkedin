@@ -1,0 +1,43 @@
+.nav {
+  @apply bg-gray-50 shadow-md;
+}
+
+.nav > div {
+  @apply mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 flex justify-between;
+}
+
+.container {
+  @apply relative flex h-16 items-center justify-between flex-grow;
+}
+
+.logo {
+  @apply flex flex-1 items-center justify-start;
+}
+
+.logo > img {
+  @apply h-8 w-auto;
+}
+
+.logo > p {
+  @apply ml-4 text-gray-700 font-medium;
+}
+
+.links {
+  @apply flex-grow;
+}
+
+.links > div {
+  @apply flex space-x-6;
+}
+
+.navLink {
+  @apply text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium;
+}
+
+.logout {
+  @apply absolute right-0 flex items-center;
+}
+
+.logout > button {
+  @apply mr-4 p-2 rounded-sm bg-slate-300 hover:bg-slate-400 font-medium;
+}

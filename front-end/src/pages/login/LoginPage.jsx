@@ -1,8 +1,10 @@
 import { useState } from "react";
 import styles from "./LoginPage.module.css";
-import axiosInstance from "../../config/axiosInstance";
+import { useAuthProvider } from "../../contexts/AuthProvider";
 
 export default function SignInForm() {
+  const { login } = useAuthProvider();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,12 +23,14 @@ export default function SignInForm() {
 
     // console.log("Form data submitted:", formData);
 
-    try {
-      const response = await axiosInstance.post("/auth/login", formData);
-      console.log(response.data);
-    } catch (err) {
-      console.log(err.response?.data);
-    }
+    // try {
+    //   const response = await axiosInstance.post("/auth/login", formData);
+    //   console.log(response.data);
+    // } catch (err) {
+    //   console.log(err.response?.data);
+    // }
+
+    await login(formData);
   };
 
   return (
