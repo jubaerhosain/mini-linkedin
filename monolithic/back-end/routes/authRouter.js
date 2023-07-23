@@ -8,4 +8,6 @@ authRouter.post("/register", authValidator.registrationValidator, authController
 
 authRouter.post("/login", authValidator.loginValidator, authController.login)
 
+authRouter.delete("/logout", authController.logout)
+
 export default authRouter;

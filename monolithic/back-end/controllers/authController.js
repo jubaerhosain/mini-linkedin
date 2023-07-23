@@ -51,7 +51,20 @@ async function login(req, res) {
     }
 }
 
+async function logout(req, res) {
+    try {
+        // do the stuffs in authService.logout if needed
+
+        res.clearCookie(config.cookie.authCookieName);
+        res.json(Response.success("Logged out successfully"));
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(Response.error("Internal Server Error", Response.SERVER_ERROR));
+    }
+}
+
 export default {
     register,
     login,
+    logout
 };
