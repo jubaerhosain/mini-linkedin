@@ -27,7 +27,7 @@ async function createPost(req, res) {
 
         await notificationRepository.createMany(notifications);
 
-        res.json(Response.success("Post added successfully"));
+        res.json(Response.success("Post added successfully", postData));
     } catch (err) {
         console.log(err);
         res.status(500).json(Response.error("Internal Server Error", Response.SERVER_ERROR));

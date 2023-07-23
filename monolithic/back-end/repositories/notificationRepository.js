@@ -52,7 +52,7 @@ async function deleteOldNotifications() {
     const maxNotificationCount = 5;
 
     try {
-        const notificationCount = await Notification.countDocuments();
+        const notificationCount = await Notification.countDocuments({is_read: true});
 
         if (notificationCount > maxNotificationCount) {
             const oldestNotifications = await Notification.find({ is_read: true })
