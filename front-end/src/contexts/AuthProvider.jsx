@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../config/axiosInstance";
 
 const AuthContext = createContext();
 
@@ -15,9 +15,11 @@ export function AuthProvider({ children }) {
   const loadUserIfLoggedIn = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`/api/users/`);
-      if (response.success) {
-        setUser(response.data);
+      const response = await axiosInstance.get(`/auth`);
+      console.log(response.data.data);
+
+      if (response.data?.success) {
+        setUser(response.data.data);
       }
     } catch (err) {
       console.log(err);
@@ -29,10 +31,20 @@ export function AuthProvider({ children }) {
     loadUserIfLoggedIn();
   }, []);
 
-  async function login(data) {
-    const response = await axios.post(`/api/users`, data);
+  async function register(data) {
+    const response = await axiosInstance.post(`/auth/register`, data);
 
-    if (response.success) {
+    if (response.data?.success) {
+      loadUserIfLoggedIn();
+    }
+
+    return response;
+  }
+
+  async function login(data) {
+    const response = await axiosInstance.post(`/auth/login`, data);
+
+    if (response.data?.success) {
       loadUserIfLoggedIn();
     }
 
@@ -40,7 +52,7 @@ export function AuthProvider({ children }) {
   }
 
   async function logout() {
-    const response = await axios.delete(`/api/users`);
+    const response = await axiosInstance.delete(`/api/users`);
 
     if (response.success) {
       setUser(null);
@@ -49,5 +61,7 @@ export function AuthProvider({ children }) {
     return response;
   }
 
-  return <AuthContext.Provider value={{ loading, user, login, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ loading, user, register, login, logout }}>{children}</AuthContext.Provider>
+  );
 }
