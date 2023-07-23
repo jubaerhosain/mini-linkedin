@@ -42,7 +42,12 @@ const NotificationsPage = () => {
         </button>
       </div>
       {notifications.map((notification) => (
-        <div key={notification.id} className={` flex flex-row justify-between notification ${notification.is_read ? "" : "bg-gray-300"}`}>
+        <div
+          key={notification.id}
+          className={` flex flex-row justify-between notification ${
+            notification.is_read ? "" : "bg-gray-300"
+          }`}
+        >
           <img
             src={notification.user.image}
             alt={notification.user.name}
