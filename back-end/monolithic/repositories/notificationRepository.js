@@ -7,7 +7,7 @@ async function createOne(notification) {
         return newNotification;
     } catch (err) {
         console.log(err);
-        throw new Error("An error occured");
+        throw new Error("An error occurred");
     }
 }
 
