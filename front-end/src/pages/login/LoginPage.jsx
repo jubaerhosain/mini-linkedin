@@ -79,7 +79,19 @@ export default function SignInForm() {
           </div>
 
           <div className={styles.rememberForgot}>
-            <label className="block text-sm font-medium leading-6 text-gray-900 text-left">Remember me</label>
+            <div className="flex items-center h-5">
+              <input
+                id="checkbox"
+                name="checkbox"
+                type="checkbox"
+                className="w-4 h-4 mr-2 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                required=""
+              />
+              <label htmlFor="checkbox" className="block text-sm font-medium leading-6 text-gray-900 text-left">
+                Remember me
+              </label>
+            </div>
+
             <div>
               <a href="#">Forgot password?</a>
             </div>

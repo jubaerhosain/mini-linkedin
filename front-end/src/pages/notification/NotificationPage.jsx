@@ -35,11 +35,13 @@ const NotificationsPage = () => {
 
   return (
     <div className="container mx-auto py-6 max-w-md">
-      <h1 className="text-2xl font-bold mb-4">Notifications</h1>
-      <div className="flex justify-end mb-4">
-        <button onClick={markAllAsRead} className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-          Mark All as Read
-        </button>
+      <div className="flex flex-row justify-between">
+        <h1 className="text-2xl font-bold mb-4">Notifications</h1>
+        <div className="flex justify-end mb-4">
+          <button onClick={markAllAsRead} className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+            Mark All as Read
+          </button>
+        </div>
       </div>
       {notifications.map((notification) => (
         <div

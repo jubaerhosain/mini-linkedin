@@ -3,7 +3,9 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import PrivateLayout from "./PrivateLayout";
 import PublicLayout from "./PublicLayout";
 
+import RegistrationPage from "../pages/registration/RegistrationPage";
 import LoginPage from "../pages/login/LoginPage";
+
 
 import Navbar from "../components/navbar/Navbar";
 import HomePage from "../pages/home/HomePage";
@@ -23,7 +25,7 @@ export default function MainRoutes() {
     <Routes>
       <Route path="/*" element={<PublicLayout />}>
         <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<h1>registration</h1>} />
+        <Route path="register" element={< RegistrationPage/>} />
       </Route>
 
       <Route path="/*" element={<PrivateLayout />}>
