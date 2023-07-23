@@ -31,6 +31,16 @@ async function findOneByEmail(email) {
     }
 }
 
+async function findOneById(_id) {
+    try {
+        const existedUser = await User.findOne({ _id });
+        return existedUser;
+    } catch (err) {
+        console.log(err);
+        throw new Error("An error occurred getting user information");
+    }
+}
+
 async function findAllFriends(user_id) {
     try {
         const users = await User.find({ _id: { $ne: user_id } });
@@ -45,5 +55,6 @@ export default {
     createOne,
     isEmailExists,
     findOneByEmail,
+    findOneById,
     findAllFriends,
 };

@@ -63,8 +63,20 @@ async function logout(req, res) {
     }
 }
 
+async function getLoggedInUser(req, res) {
+    try {
+        const user = req.user;
+
+        res.json(Response.success("User retrieved successfully", user));
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(Response.error("Internal Server Error", Response.SERVER_ERROR));
+    }
+}
+
 export default {
     register,
     login,
-    logout
+    logout,
+    getLoggedInUser,
 };
