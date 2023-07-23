@@ -3,6 +3,7 @@ import path from "path";
 import { v4 as uuidv4 } from 'uuid';
 import minioClient from '../config/minioClient.js';
 import { Response } from '../utils/responseUtils.js';
+import config from '../config/config.js';
 
 function singleFileUploader(name) {
     return async function (req, res, next) {
@@ -24,7 +25,7 @@ function singleFileUploader(name) {
                         res.status(500).json(Response.error("An error occured while saving to minio"));
                     } else {
                         // console.log('File uploaded successfully:', etag);
-                        req.body.img_url = `http:localhost:9000/${bucketName}/${fileName}`;
+                        req.body.img_url = `${config.minio.uri}/${bucketName}/${fileName}`;
                         next();
                     }
                 });

@@ -20,5 +20,6 @@ export default {
         useSSL: false,
         accessKey: process.env.MINIO_ACCESS_KEY,
         secretKey: process.env.MINIO_SECRET_KEY,
+        uri: `http://${process.env.MINIO_ENDPOINT}:${process.env.MINIO_PORT}`
     },
 };
