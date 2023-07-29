@@ -6,10 +6,10 @@ import PublicLayout from "./PublicLayout";
 import RegistrationPage from "../pages/registration/RegistrationPage";
 import LoginPage from "../pages/login/LoginPage";
 
-
 import Navbar from "../components/navbar/Navbar";
 import HomePage from "../pages/home/HomePage";
 import NotificationPage from "../pages/notification/NotificationPage";
+import AddPostPage from "../pages/addpost/AddPostPage";
 
 function HomeLayout() {
   return (
@@ -25,13 +25,14 @@ export default function MainRoutes() {
     <Routes>
       <Route path="/*" element={<PublicLayout />}>
         <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={< RegistrationPage/>} />
+        <Route path="register" element={<RegistrationPage />} />
       </Route>
 
       <Route path="/*" element={<PrivateLayout />}>
         <Route element={<HomeLayout />}>
           <Route index element={<HomePage />} />
           <Route path="notifications" element={<NotificationPage />} />
+          <Route path="addpost" element={<AddPostPage />} />
         </Route>
       </Route>
     </Routes>

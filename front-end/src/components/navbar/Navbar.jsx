@@ -26,6 +26,9 @@ export default function Navbar() {
               <NavLink to="/notifications" className={styles.navLink}>
                 Notifications
               </NavLink>
+              <NavLink to="/addpost" className={styles.navLink}>
+                Add Post
+              </NavLink>
             </div>
           </div>
 
