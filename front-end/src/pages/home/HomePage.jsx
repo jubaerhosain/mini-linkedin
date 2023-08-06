@@ -24,7 +24,7 @@ export default function HomePage() {
           <div key={post._id} className="post bg-white shadow-md rounded-md p-4 mb-4">
             <div className="flex items-center mb-4">
               <img src={"/blank_person.png"} alt={"Image"} className="w-10 h-10 rounded-full mr-2" />
-              <span className="font-bold">{"Name"}</span>
+              <span className="font-bold">{post.user_id.name}</span>
             </div>
             <p className="text-gray-700 mb-2">{post.content}</p>
             {/* {post.img_url && <img src={post.img_url} alt="Post" className="w-full rounded-md" />} */}
