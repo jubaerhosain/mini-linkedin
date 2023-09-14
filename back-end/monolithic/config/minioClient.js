@@ -9,4 +9,15 @@ const minioClient = new Minio.Client({
     secretKey: config.minio.secretKey,
 });
 
+minioClient.listBuckets((err, buckets) => {
+    if (err) {
+        console.log("Error connecting to minio...");
+        console.error(err);
+        return;
+    }
+
+    console.log("Successfully connected to minio...");
+    console.log("list of buckets: ", buckets);
+});
+
 export default minioClient;

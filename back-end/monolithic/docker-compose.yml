@@ -1,0 +1,54 @@
+# always use hypehn(-) instead of underscore(_) in docker-compose service names otherwise errors may occur
+
+version: '3'
+services:
+  mini-linkedin-monolithic-nodejs-server:
+    build: .
+    image: mini-linkedin-monolithic-server
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mini-linkedin-monolithic-mongodb
+      - mini-linkedin-monolithic-minio
+    networks:
+      - mini_linkedin_monolithic_network
+    environment:
+      # - NODE_ENV=production
+      - MONGODB_URI=mongodb://mini-linkedin-monolithic-mongodb:27017/mini_linkedin
+      - MINIO_ENDPOINT=mini-linkedin-monolithic-minio
+      - MINIO_PORT=9000
+      - MINIO_ACCESS_KEY=minioadmin
+      - MINIO_SECRET_KEY=minioadmin
+
+  mini-linkedin-monolithic-mongodb:
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mini_linkedin_monolithic_mongo_data:/data/db
+    networks:
+      - mini_linkedin_monolithic_network
+
+  mini-linkedin-monolithic-minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - mini_linkedin_monolithic_minio_data:/data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server --address ":9000" --console-address ":9001" /data
+    networks:
+      - mini_linkedin_monolithic_network
+
+
+volumes:
+  mini_linkedin_monolithic_mongo_data:
+  mini_linkedin_monolithic_minio_data:
+
+
+networks:
+  mini_linkedin_monolithic_network:
+    driver: bridge
