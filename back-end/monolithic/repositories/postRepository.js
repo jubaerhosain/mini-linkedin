@@ -15,7 +15,12 @@ async function findAll(user_id) {
     try {
         // find all posts excluding this user_id(see doc)
         // const posts = await Post.find();
-        const posts = await Post.find({ user_id: { $ne: user_id } });
+
+        // const posts = await Post.find({ user_id: { $ne: user_id } });
+
+        const posts = await Post.find({ user_id: { $ne: user_id } })
+            .populate('user_id', '-password')
+            .exec();
 
         return posts;
     } catch (err) {
