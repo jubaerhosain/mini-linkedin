@@ -1,0 +1,21 @@
+# version: '3.4'
+# services:
+#     mini-linkedin-nginx-app:
+#       stdin_open: true
+#       build:
+#         context: .
+#         dockerfile: Dockerfile
+#       expose:
+#         - 8080
+#       ports:
+#         - 8080:80
+
+version: '3.4'
+services:
+    mini-linkedin-nginx-app:
+      build: .
+      image: mini-linkedin-nginx-app
+      expose:
+        - 8080
+      ports:
+        - 8080:80
