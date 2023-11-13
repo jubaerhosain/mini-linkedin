@@ -21,7 +21,7 @@ FROM nginx:latest
 # Set working directory to nginx asset directory
 WORKDIR /usr/share/nginx/html
 
-# # Remove default nginx static assets
+# Remove default nginx static assets
 RUN rm -rf ./*
 
 # Copy the built React app from the previous stage to the Nginx container
